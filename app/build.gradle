@@ -96,4 +96,6 @@ dependencies {
 
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+
+    implementation 'com.afollestad.inline-activity-result:core:0.2.0'
 }
