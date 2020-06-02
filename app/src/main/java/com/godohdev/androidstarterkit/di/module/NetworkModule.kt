@@ -1,8 +1,12 @@
 package com.godohdev.androidstarterkit.di.module
 
+import android.content.Context
 import com.godohdev.androidstarterkit.BuildConfig
+import com.godohdev.androidstarterkit.data.local.sdf.AppSession
 import com.godohdev.androidstarterkit.data.network.ApiService
+import com.godohdev.androidstarterkit.external.network.NetworkInterceptor
 import com.google.gson.Gson
+import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -22,6 +26,15 @@ class NetworkModule {
     @Provides
     @Singleton
     fun gson(): Gson = Gson()
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(appSession: AppSession, context: Context): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(NetworkInterceptor(appSession))
+            .addInterceptor(ChuckInterceptor(context))
+            .build()
+    }
 
     @Provides
     @Singleton
