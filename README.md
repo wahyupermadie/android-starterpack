@@ -1,3 +1,5 @@
+![CI](https://github.com/wahyupermadie/android-starterpack/workflows/CI/badge.svg)
+
 # android-starterpack
 
 Android MVVM Starter Kit.
