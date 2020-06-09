@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 
 /**
  *
@@ -21,4 +22,12 @@ fun Context.isNetworkConnected(): Boolean {
 
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, action: (t: T) -> Unit) {
     liveData.observe(this, Observer { it?.let { t -> action(t) } })
+}
+
+inline fun <T> LiveData<T>.withUseCase(
+    crossinline result: (T) -> T
+): LiveData<T> {
+    return Transformations.map(this){
+        result.invoke(it)
+    }
 }
